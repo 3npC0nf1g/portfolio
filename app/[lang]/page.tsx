@@ -76,6 +76,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <Carousel
           label={ui.carousel.label}
           labels={ui.carousel}
+          slideNames={projects.items.map((p) => p.title)}
           header={
             <>
               <h2 id="projects-heading" className="text-4xl font-extrabold tracking-tight sm:text-5xl">

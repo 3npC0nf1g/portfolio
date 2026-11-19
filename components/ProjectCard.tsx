@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProjectMediaFrame } from "@/components/ProjectMediaFrame";
 import { Todo } from "@/components/ui/Todo";
 import type { Project } from "@/content/site";
 import { getSite, localize, type Locale } from "@/lib/i18n";
@@ -14,8 +15,16 @@ export function ProjectSlide({ project, index, lang }: { project: Project; index
     <li className="w-[82%] shrink-0 snap-start sm:w-[22rem]">
       <article
         data-tone="pastel"
-        className={`group relative flex h-full min-h-[17rem] flex-col rounded-[2rem] p-7 text-ink transition-transform duration-200 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${pastel(index)}`}
+        className={`group relative flex h-full min-h-[17rem] flex-col overflow-hidden rounded-[2rem] p-7 text-ink transition-transform duration-200 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${pastel(index)}`}
       >
+        <ProjectMediaFrame
+          media={project.media}
+          slug={project.slug}
+          todoLabel={t.ui.mediaTodo}
+          sizes="(min-width: 640px) 22rem, 82vw"
+          hideEmpty
+          className="-mx-7 -mt-7 mb-5"
+        />
         {project.role && (
           <p className="mb-3 inline-flex self-start rounded-full bg-ink px-3 py-1 font-display text-xs font-bold text-white">
             {project.role}
@@ -53,6 +62,12 @@ export function ProjectCard({ project, index, lang }: { project: Project; index:
       aria-labelledby={titleId}
       className="flex h-full scroll-mt-28 flex-col overflow-hidden rounded-[2rem] border border-line bg-surface"
     >
+      <ProjectMediaFrame
+        media={project.media}
+        slug={project.slug}
+        todoLabel={t.ui.mediaTodo}
+        sizes="(min-width: 768px) 36rem, 100vw"
+      />
       <div data-tone="pastel" className={`px-7 pt-7 pb-6 text-ink sm:px-8 ${pastel(index)}`}>
         {project.role && (
           <p className="mb-3 inline-flex rounded-full bg-ink px-3 py-1 font-display text-xs font-bold text-white">

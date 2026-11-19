@@ -102,6 +102,40 @@ export const siteFr: Site = {
     educationLabel: "Formation",
   },
 
+  experience: {
+    heading: "Expérience",
+    items: [
+      {
+        ...site.experience.items[0],
+        type: "Contrat, temps plein",
+        dates: "oct. 2025 – aujourd'hui",
+      },
+      {
+        ...site.experience.items[1],
+        role: "Développeur IA",
+        type: "Stage",
+        dates: "juil. 2025 – sept. 2025",
+        location: "Tournai, Belgique (hybride)",
+        points: [
+          "Construit l'interface TypeScript et Next.js et les services backend d'un assistant vocal GPT-4o (API Azure OpenAI) qui automatise les commandes de restaurant, aujourd'hui en production.",
+          "Mis en œuvre l'ingénierie de prompts, la gestion du contexte et la logique de commande en temps réel, avec une gestion d'erreurs robuste pour les conversations à plusieurs tours.",
+          "Mis en place l'observabilité (journalisation structurée, suivi de la latence et de la qualité) pour repérer les problèmes et vérifier la sécurité des réponses de l'IA en production.",
+          "Temps de traitement des commandes réduit de 7 à 3 minutes, soit 57 % plus rapide.",
+        ],
+        link: { label: "Lire l'étude de cas", href: "/projects/voice-assistant" },
+      },
+      {
+        ...site.experience.items[2],
+        role: "Fondateur",
+        type: "Produit personnel",
+        points: [
+          "Une application bilingue qui aide les gens à trouver leur communauté culturelle partout au Canada : commerces, événements, logements et emplois.",
+        ],
+        link: { label: "Visiter mbeya.ca", href: "https://mbeya.ca" },
+      },
+    ],
+  },
+
   projects: {
     heading: "Projets",
     intro: "Quelques projets que j'ai construits.",
@@ -174,10 +208,13 @@ export const siteFr: Site = {
       "Étude de cas : un assistant vocal GPT-4o pour les commandes de restaurant, construit pendant un stage chez Never2Wait. Le traitement des commandes est passé de 7 minutes à 3, soit 57 % plus rapide.",
     lede: "Un assistant vocal GPT-4o qui prend les commandes de restaurant, construit pendant mon stage chez Never2Wait et en production. Il a réduit le traitement des commandes de 7 minutes à 3, soit 57 % plus rapide, et à environ 1 minute pour les commandes répétées ou structurées.",
     role: "Stagiaire chez Never2Wait, Tournai, Belgique (hybride)",
+    timeframe: "De juillet à septembre 2025 (3 mois)",
     sections: [
       {
         heading: "Le problème",
-        body: ["Traiter une seule commande de restaurant prenait environ 7 minutes.", site.caseStudy.sections[0].body[1]],
+        body: [
+          "Never2Wait voulait que les clients puissent commander à la voix, et réduire le temps de traitement d'une commande. Traiter une seule commande de restaurant prenait environ 7 minutes.",
+        ],
       },
       {
         heading: "L'approche",
@@ -197,12 +234,11 @@ export const siteFr: Site = {
         heading: "Résultat",
         body: [
           "L'assistant est en production. Le traitement des commandes est passé de 7 minutes à 3, soit 57 % plus rapide. Les commandes répétées ou structurées prennent environ 1 minute.",
-          site.caseStudy.sections[3].body[1],
         ],
       },
       {
         heading: "Ce que je ferais ensuite",
-        body: site.caseStudy.sections[4].body,
+        body: ["J'essaierais d'autres techniques pour réduire les hallucinations et je comparerais les résultats."],
       },
     ],
   },
@@ -312,10 +348,11 @@ export const siteFr: Site = {
     pdf: "(PDF)",
     newTab: "(s'ouvre dans un nouvel onglet)",
     language: { switchTo: "EN", switchToName: "Read in English" },
-    carousel: { label: "Projets", previous: "Précédent", next: "Suivant", scroll: "défilement horizontal" },
+    carousel: { label: "Projets", previous: "Précédent", next: "Suivant", scroll: "défilement horizontal", goTo: "Aller à" },
     technologies: "Technologies",
     skillsSuffix: "compétences",
     addLinkTodo: site.ui.addLinkTodo,
+    mediaTodo: site.ui.mediaTodo,
     about: { story: "Mon parcours", seeProjects: "Voir mes projets", getInTouch: "Me contacter" },
     contact: {
       emailBlurb: "Le moyen le plus rapide de me joindre.",

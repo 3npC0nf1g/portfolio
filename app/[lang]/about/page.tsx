@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { PageHeader } from "@/components/PageHeader";
 import { Portrait } from "@/components/Portrait";
 import { ButtonLink } from "@/components/ui/Button";
@@ -21,7 +22,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 
-  const { about, person, skills, more, ui } = getSite(lang);
+  const { about, person, skills, more, experience, ui } = getSite(lang);
 
   return (
     <>
@@ -47,6 +48,16 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
               {person.education.honours}
             </p>
           </aside>
+        </section>
+
+        {/* Experience */}
+        <section id="experience" aria-labelledby="experience-heading" className="scroll-mt-28">
+          <h2 id="experience-heading" className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+            {experience.heading}
+          </h2>
+          <div className="mt-8">
+            <ExperienceTimeline items={experience.items} lang={lang} newTab={ui.newTab} />
+          </div>
         </section>
 
         {/* Skills */}

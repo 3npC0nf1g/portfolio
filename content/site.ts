@@ -34,6 +34,33 @@ export type Project = {
   linkLabel: string;
   /** Optional second link, e.g. a LinkedIn post or a live app. */
   secondaryLink?: { label: string; href: string };
+  /** Screenshot or video. null = an empty, marked slot on the Projects page. */
+  media: ProjectMedia | null;
+};
+
+/**
+ * A screenshot or short video for a project. Put the file in public/projects/
+ * and set e.g. { kind: "image", src: "/projects/mbeya.png", alt: "MBEYA home screen" }.
+ * Videos: { kind: "video", src: "/projects/asl.mp4", alt: "...", poster: "/projects/asl.jpg" }.
+ * Keep videos short (under ~15 s) and small (MP4, under ~5 MB) so pages stay fast.
+ */
+export type ProjectMedia = {
+  kind: "image" | "video";
+  src: string;
+  alt: string;
+  /** Video only: image shown before the video plays. */
+  poster?: string;
+};
+
+export type ExperienceItem = {
+  role: string;
+  company: string;
+  type: string;
+  dates: string;
+  location: string;
+  /** Short points. A string starting with "[TODO]" shows as a placeholder. */
+  points: string[];
+  link?: { label: string; href: string };
 };
 
 export type ProofRow = {
@@ -160,6 +187,43 @@ export const site = {
     educationLabel: "Education",
   },
 
+  experience: {
+    heading: "Experience",
+    items: [
+      {
+        role: "Data Scientist",
+        company: "PAMBE",
+        type: "Contract, full-time",
+        dates: "Oct 2025 – Present",
+        location: "",
+        points: ["[TODO] What you do at PAMBE, in 2 or 3 short points"],
+      },
+      {
+        role: "AI Developer",
+        company: "Never2Wait",
+        type: "Internship",
+        dates: "Jul 2025 – Sep 2025",
+        location: "Tournai, Belgium (hybrid)",
+        points: [
+          "Built the TypeScript and Next.js interface and backend services for a GPT-4o voice assistant (Azure OpenAI API) that automates restaurant orders, now live in production.",
+          "Implemented prompt engineering, context management and real-time order logic, with robust error handling for multi-turn conversations.",
+          "Set up observability (structured logging, latency and quality monitoring) to catch issues and check AI output safety in production.",
+          "Order processing time cut from 7 to 3 minutes, a 57% improvement.",
+        ],
+        link: { label: "Read the case study", href: "/projects/voice-assistant" },
+      },
+      {
+        role: "Founder",
+        company: "MBEYA",
+        type: "Own product",
+        dates: "[TODO] Start date – Present",
+        location: "Canada",
+        points: ["A bilingual app that helps people find their cultural community across Canada: businesses, events, housing and jobs."],
+        link: { label: "Visit mbeya.ca", href: "https://mbeya.ca" },
+      },
+    ] as ExperienceItem[],
+  },
+
   projects: {
     heading: "Projects",
     intro: "A few things I've built.",
@@ -175,6 +239,7 @@ export const site = {
         tags: ["Next.js", "TypeScript", "Tailwind", "FastAPI", "PostgreSQL", "Auth0", "Cloudinary", "Vercel", "Railway"],
         href: "https://mbeya.ca",
         linkLabel: "Visit mbeya.ca",
+        media: null, // [TODO] screenshot or video, see ProjectMedia above
       },
       {
         slug: "voice-assistant",
@@ -188,6 +253,7 @@ export const site = {
         href: "/projects/voice-assistant",
         linkLabel: "Read the case study",
         secondaryLink: { label: "See the LinkedIn post", href: "https://lnkd.in/p/dfna-zuX" },
+        media: null, // [TODO] screenshot or video, see ProjectMedia above
       },
       {
         slug: "cardscan-pro",
@@ -200,6 +266,7 @@ export const site = {
         href: "https://lnkd.in/ebwJM7Xy",
         linkLabel: "Try CardScan Pro",
         secondaryLink: { label: "See the LinkedIn post", href: "https://lnkd.in/p/d3-KJHBz" },
+        media: null, // [TODO] screenshot or video, see ProjectMedia above
       },
       {
         slug: "asl-converter",
@@ -211,6 +278,7 @@ export const site = {
         tags: ["Computer vision", "MediaPipe", "MLP", "Feature engineering", "Edge ML"],
         href: "https://lnkd.in/p/ggYyQ5Br",
         linkLabel: "See the LinkedIn post",
+        media: null, // [TODO] screenshot or video, see ProjectMedia above
       },
       {
         slug: "projet-genlog",
@@ -223,6 +291,7 @@ export const site = {
         tags: ["Java", "Spring Boot", "Vue.js", "Vite", "MySQL", "Docker"],
         href: "https://github.com/3npC0nf1g/ProjetGenLog",
         linkLabel: "View on GitHub",
+        media: null, // [TODO] screenshot or video, see ProjectMedia above
       },
       // [TODO] Add more projects here using the same shape (and in content/site.fr.ts).
     ] as Project[],
@@ -254,13 +323,12 @@ export const site = {
       "Case study: a GPT-4o voice assistant for restaurant orders, built during an internship at Never2Wait. Order processing went from 7 minutes to 3, a 57% improvement.",
     lede: "A GPT-4o voice assistant that takes restaurant orders, built during my internship at Never2Wait and live in production. It cut order processing from 7 minutes to 3, a 57% improvement, and to about 1 minute for repeat or structured orders.",
     role: "Intern at Never2Wait, Tournai, Belgium (hybrid)",
-    timeframe: "[TODO] When you built it and how long it took",
+    timeframe: "July to September 2025 (3 months)",
     sections: [
       {
         heading: "Problem",
         body: [
-          "Processing a single restaurant order took about 7 minutes.",
-          "[TODO] Who the restaurant or client was (or a general description), how orders came in before, and what made them slow.",
+          "Never2Wait wanted customers to be able to order by voice, and to cut the time it takes to process an order. Processing a single restaurant order took about 7 minutes.",
         ],
       },
       {
@@ -281,12 +349,11 @@ export const site = {
         heading: "Result",
         body: [
           "The assistant is live in production. Order processing went from 7 minutes to 3, a 57% improvement. Repeat or structured orders take about 1 minute.",
-          "[TODO] Any other results you can share, such as volume handled or accuracy.",
         ],
       },
       {
         heading: "What I would do next",
-        body: ["[TODO] Your own next steps for the system."],
+        body: ["I would try other techniques to reduce hallucinations and compare the results."],
       },
     ] satisfies CaseStudySection[],
   },
@@ -423,10 +490,11 @@ export const site = {
     pdf: "(PDF)",
     newTab: "(opens in a new tab)",
     language: { switchTo: "FR", switchToName: "Lire en français" },
-    carousel: { label: "Projects", previous: "Previous", next: "Next", scroll: "scroll horizontally" },
+    carousel: { label: "Projects", previous: "Previous", next: "Next", scroll: "scroll horizontally", goTo: "Go to" },
     technologies: "Technologies",
     skillsSuffix: "skills",
     addLinkTodo: "[TODO] Add a link or write-up",
+    mediaTodo: "[TODO] Screenshot or video",
     about: { story: "My story", seeProjects: "See my projects", getInTouch: "Get in touch" },
     contact: {
       emailBlurb: "The fastest way to reach me.",
