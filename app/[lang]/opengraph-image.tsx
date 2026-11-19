@@ -1,13 +1,20 @@
 import { ImageResponse } from "next/og";
 import { brand, displayFont, photoDataUrl } from "@/lib/og";
 import { site } from "@/content/site";
+import { getSite, hasLocale, locales } from "@/lib/i18n";
 
 export const alt = `${site.person.name}, ${site.hero.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OpengraphImage() {
-  const { person, hero } = site;
+// One image per language, generated at build time.
+export function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export default async function OpengraphImage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const { person, hero } = getSite(hasLocale(lang) ? lang : "en");
   return new ImageResponse(
     (
       <div
@@ -17,10 +24,10 @@ export default async function OpengraphImage() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          background: brand.ultramarine,
+          background: brand.violet,
           color: brand.white,
           padding: "72px",
-          fontFamily: "Bricolage Grotesque",
+          fontFamily: "Gabarito",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 760 }}>
@@ -31,7 +38,7 @@ export default async function OpengraphImage() {
           </div>
           <div style={{ fontSize: 44, marginTop: 28, color: brand.muted }}>{hero.role}</div>
           <div style={{ fontSize: 28, marginTop: 36, color: brand.muted }}>
-            {`MSc AI and Computer Science with Distinction, ${person.education.school}`}
+            {`${person.education.degree}, ${person.education.honours.toLowerCase()}`}
           </div>
         </div>
         {/* Tilted portrait on a blush block, echoing the hero on the site. */}
@@ -43,7 +50,7 @@ export default async function OpengraphImage() {
               left: 0,
               width: 260,
               height: 320,
-              background: brand.blush,
+              background: brand.sun,
               borderRadius: 40,
               transform: "rotate(4deg) translate(12px, 12px)",
             }}
@@ -59,7 +66,7 @@ export default async function OpengraphImage() {
               alignItems: "center",
               justifyContent: "center",
               background: brand.ink,
-              color: brand.blush,
+              color: brand.sun,
               borderRadius: 40,
               border: `6px solid ${brand.white}`,
               transform: "rotate(-3deg)",
@@ -76,6 +83,6 @@ export default async function OpengraphImage() {
         </div>
       </div>
     ),
-    { ...size, fonts: [{ name: "Bricolage Grotesque", data: displayFont, weight: 800, style: "normal" }] },
+    { ...size, fonts: [{ name: "Gabarito", data: displayFont, weight: 800, style: "normal" }] },
   );
 }

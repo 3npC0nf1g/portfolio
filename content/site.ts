@@ -18,7 +18,11 @@ export type ContactLink = {
 export type Fact = { term: string; detail: string };
 
 export type Project = {
+  /** Used for /projects#slug anchors. */
+  slug: string;
   title: string;
+  /** One sentence for the home-page carousel. */
+  short: string;
   /** Optional badge, e.g. "Founder". */
   role?: string;
   summary: string;
@@ -80,12 +84,40 @@ export const site = {
   },
 
   nav: [
-    { label: "About", href: "/#about" },
-    { label: "Projects", href: "/#projects" },
-    { label: "Skills", href: "/#skills" },
-    { label: "Interests", href: "/#more" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Projects", href: "/projects" },
+    { label: "Contact", href: "/contact" },
   ],
+
+  // Page titles and descriptions for search engines and link previews.
+  pages: {
+    about: {
+      title: "About",
+      description:
+        "About Steve Teuma: AI and software engineer in Toronto, Master's in AI and Computer Science with Distinction from the University of Mons, bilingual English and French.",
+    },
+    projects: {
+      title: "Projects",
+      description:
+        "Projects by Steve Teuma: MBEYA, a real-time ASL to English converter, a professional matching system, agent workflows with MCP, and a restaurant voice assistant.",
+    },
+    contact: {
+      title: "Contact",
+      description: "Get in touch with Steve Teuma, AI and software engineer in Toronto.",
+    },
+  },
+
+  home: {
+    projectsHeading: "Things I've built",
+    projectsLink: "See all projects",
+    cta: {
+      heading: "Want to build something together?",
+      body: "I'm looking for AI and software engineering roles, and I'm always happy to talk.",
+      contactLabel: "Get in touch",
+      aboutLabel: "More about me",
+    },
+  },
 
   hero: {
     status: "Currently building AI products with GPT, Claude and Gemini",
@@ -93,8 +125,11 @@ export const site = {
     role: "AI and Software Engineer in Toronto",
     intro:
       "I'm a software engineer who specializes in AI. I build the models, the backends and the apps around them, so AI features hold up in production: LLMs, RAG, AI agents and real-time speech. I have a Master's in Artificial Intelligence and Computer Science from the University of Mons in Belgium, with Distinction, and more than three years of software engineering experience.",
-    primaryCta: { label: "See my projects", href: "/#projects" },
-    secondaryCta: { label: "Get in touch", href: "/#contact" },
+    // Shorter intro used on the home page.
+    short:
+      "I'm a software engineer who specializes in AI. I build the models, the backends and the apps around them, so AI features hold up in the real world.",
+    primaryCta: { label: "See my projects", href: "/projects" },
+    secondaryCta: { label: "Get in touch", href: "/contact" },
     resumeLabel: "Download my resume",
     facts: [
       { term: "Based in", detail: "Toronto, Canada" },
@@ -128,7 +163,9 @@ export const site = {
     intro: "A few things I've built.",
     items: [
       {
+        slug: "mbeya",
         title: "MBEYA",
+        short: "A bilingual app that helps people find their cultural community across Canada.",
         role: "Founder",
         summary:
           "A bilingual (English and French) app that helps people find their cultural community anywhere in Canada. It brings together local businesses, events, housing and jobs, so it's easy to find a restaurant from home, a community event, or a business that serves your community.",
@@ -138,7 +175,9 @@ export const site = {
         linkLabel: "Visit mbeya.ca",
       },
       {
+        slug: "asl-converter",
         title: "Real-time ASL to English converter",
+        short: "Turns sign language letters into text in real time, on a regular laptop CPU.",
         summary:
           "Turns American Sign Language letters into text in real time. MediaPipe tracks 21 hand joints, which become a 63-value feature vector for a small MLP classifier. Careful feature engineering instead of heavy deep learning models, so it runs on a regular laptop CPU and could run on edge devices. Next: word-level recognition, phrase prediction with language models, and mobile optimization.",
         outcome: "95% validation accuracy, under 50 ms per prediction on CPU, model under 3 MB.",
@@ -147,7 +186,9 @@ export const site = {
         linkLabel: "See the LinkedIn post",
       },
       {
+        slug: "matching-system",
         title: "Professional matching system",
+        short: "An AI product that matches professionals, built on GPT, Claude and Gemini.",
         summary:
           "An AI product that matches professionals, built on GPT, Claude and Gemini.",
         outcome: "",
@@ -157,7 +198,9 @@ export const site = {
         linkLabel: "Read more",
       },
       {
+        slug: "agent-workflows",
         title: "Agent workflows with tools and MCP",
+        short: "Workflows where AI agents use tools and connect to systems through MCP.",
         summary:
           "Agent-based workflows where models call tools and connect to systems through MCP.",
         outcome: "",
@@ -167,12 +210,14 @@ export const site = {
         linkLabel: "Read more",
       },
       {
+        slug: "voice-assistant",
         title: "Voice assistant for restaurant orders",
+        short: "A voice assistant that takes restaurant orders, live in production.",
         summary:
           "A GPT-powered voice assistant that takes restaurant orders, using LLMs, RAG, real-time speech processing and backend integrations. Live in production.",
         outcome: "Orders went from about 7 minutes to 3.",
         tags: ["GPT", "RAG", "Speech AI", "Backend APIs"],
-        href: "/work/voice-assistant",
+        href: "/projects/voice-assistant",
         linkLabel: "Read the case study",
       },
       // [TODO] Add more projects here using the same shape.
@@ -355,6 +400,49 @@ export const site = {
       label: "Download resume (PDF)",
       href: "/steve-teuma-resume.pdf",
       downloadName: "Steve-Teuma-Resume.pdf",
+    },
+  },
+
+  // Small interface text (buttons, labels, screen-reader hints).
+  ui: {
+    skipToContent: "Skip to content",
+    mainNav: "Main",
+    menu: "Menu",
+    close: "Close",
+    resume: "Resume",
+    pdfDownload: "(PDF download)",
+    pdf: "(PDF)",
+    newTab: "(opens in a new tab)",
+    language: { switchTo: "FR", switchToName: "Lire en français" },
+    carousel: { label: "Projects", previous: "Previous", next: "Next", scroll: "scroll horizontally" },
+    technologies: "Technologies",
+    skillsSuffix: "skills",
+    addLinkTodo: "[TODO] Add a link or write-up",
+    about: { story: "My story", seeProjects: "See my projects", getInTouch: "Get in touch" },
+    contact: {
+      emailBlurb: "The fastest way to reach me.",
+      resumeTitle: "Resume",
+      resumeBlurb: "Everything in one page.",
+      basedIn: "Based in",
+      languages: "English and French",
+      emailMenu: "Ways to email me",
+    },
+    caseStudy: {
+      back: "Back to all projects",
+      label: "Case study",
+      role: "Role",
+      when: "When",
+      status: "Status",
+      live: "Live in production",
+      glance: "Result at a glance",
+      ctaHeading: "Want to build something like this?",
+      contact: "Get in touch",
+      allProjects: "See all projects",
+    },
+    notFound: {
+      title: "Page not found",
+      body: "This page doesn't exist, or it moved.",
+      home: "Go to the home page",
     },
   },
 };

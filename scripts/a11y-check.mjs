@@ -3,7 +3,7 @@
 // Usage: node scripts/a11y-check.mjs [path ...]
 import puppeteer from "puppeteer-core";
 
-const paths = process.argv.slice(2).length ? process.argv.slice(2) : ["/", "/work/voice-assistant"];
+const paths = process.argv.slice(2).length ? process.argv.slice(2) : ["/en", "/en/about", "/en/projects", "/en/projects/voice-assistant", "/en/contact", "/fr", "/fr/contact"];
 const browser = await puppeteer.launch({
   executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
   headless: true,

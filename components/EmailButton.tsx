@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Labels = { gmail: string; outlook: string; app: string; copy: string; copied: string };
+type Labels = { gmail: string; outlook: string; app: string; copy: string; copied: string; menu: string };
 
 /**
  * "Send me an email" button that never shows the address on the page.
@@ -65,7 +65,7 @@ export function EmailButton({
   }
 
   const item =
-    "flex min-h-11 w-full items-center rounded-lg px-4 text-left font-medium text-[var(--brand-ink)] hover:bg-[var(--brand-blush)]";
+    "flex min-h-11 w-full items-center rounded-lg px-4 text-left font-medium text-[var(--brand-ink)] hover:bg-[var(--brand-lilac)]";
 
   return (
     <div ref={rootRef} className="relative inline-block">
@@ -82,7 +82,7 @@ export function EmailButton({
       {open && (
         <ul
           id="email-options"
-          aria-label="Ways to email me"
+          aria-label={labels.menu}
           className="absolute bottom-full left-0 z-30 mb-2 w-64 rounded-2xl bg-white p-2 shadow-[0_0_0_2px_var(--brand-ink)]"
         >
           <li>

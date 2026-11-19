@@ -1,7 +1,8 @@
-import { site } from "@/content/site";
+import { getSite, localize, type Locale } from "@/lib/i18n";
 
 /** schema.org Person, built only from content/site.ts. Unfilled links are left out. */
-export function PersonJsonLd() {
+export function PersonJsonLd({ lang }: { lang: Locale }) {
+  const site = getSite(lang);
   const sameAs = site.contact.links
     .filter((l) => l.href?.startsWith("http"))
     .map((l) => l.href as string);
@@ -13,7 +14,7 @@ export function PersonJsonLd() {
     name: site.person.name,
     jobTitle: site.person.jobTitle,
     description: site.meta.description,
-    url: `${site.url}/`,
+    url: `${site.url}${localize(lang, "/")}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: site.person.city,

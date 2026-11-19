@@ -3,74 +3,64 @@
 /*
  * Design tokens
  * -------------
- * Brand colors and semantic roles live here. Change a hex value once and
- * every component follows. Components only use the semantic names
- * (canvas, surface, fg, muted, line, link, block, deep, accent...), never raw hex.
+ * Change a hex value here and every page follows. Components only use the
+ * semantic names below, never raw hex.
  *
- * Tones (flat color blocks):
- * - block  = ultramarine section (hero, contact)
- * - deep   = ink section (skills)
- * - accent = blush fill (buttons, highlights)
+ * - canvas / surface / fg / muted / line: page background, cards, text
+ * - primary: the violet used for the hero card, buttons and links
+ * - sun / mint / peach / sky / lilac: pastel cards (always with ink text)
  */
 :root {
   /* Brand */
-  --brand-ultramarine: #2b36e8;
-  --brand-ink: #10112a;
-  --brand-blush: #ffcfe4;
-  --brand-paper: #f6f6f3;
+  --brand-violet: #6246ea;
+  --brand-ink: #231f40;
+  --brand-sun: #ffd25a;
+  --brand-mint: #bfefd9;
+  --brand-peach: #ffcdb8;
+  --brand-sky: #cfe3ff;
+  --brand-lilac: #e6e0ff;
   --brand-white: #ffffff;
 
   /* Semantic roles: light theme (default) */
-  --canvas: var(--brand-white);
-  --surface: var(--brand-paper);
+  --canvas: #fbfaff;
+  --surface: var(--brand-white);
   --fg: var(--brand-ink);
-  --muted: #50526a;
-  --line: #dcdce6;
-  --link: var(--brand-ultramarine);
+  --muted: #5a5675;
+  --line: #e4e1f2;
+  --link: var(--brand-violet);
 
-  --block: var(--brand-ultramarine);
-  --on-block: var(--brand-white);
-  --on-block-muted: #dadcff;
-  --block-line: #5560f0;
+  --primary: var(--brand-violet);
+  --on-primary: var(--brand-white);
+  --on-primary-muted: #e4deff;
+  --primary-line: #7d66ef;
 
-  --deep: var(--brand-ink);
-  --on-deep: #f1f1f8;
-  --on-deep-muted: #b4b6d0;
-  --deep-line: #2c2e52;
-
-  --accent: var(--brand-blush);
-  --on-accent: var(--brand-ink);
-
-  --focus: var(--brand-ultramarine);
+  --focus: var(--brand-violet);
 
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --canvas: #0d0e22;
-    --surface: #15163a;
-    --fg: #eeeef8;
-    --muted: #abadc8;
-    --line: #2a2c55;
-    --link: #a9b0ff;
+    --canvas: #14122a;
+    --surface: #1e1b3a;
+    --fg: #f1efff;
+    --muted: #b4afd3;
+    --line: #2f2b52;
+    --link: #b3a8ff;
 
-    --block: #2530c9;
-    --deep: #070816;
-    --deep-line: #23254a;
+    --primary: #5b3fe0;
 
-    --focus: var(--brand-blush);
+    --focus: var(--brand-sun);
 
     color-scheme: dark;
   }
 }
 
-/* Focus ring color per tone, so it is always visible. */
-[data-tone="block"],
-[data-tone="deep"] {
-  --focus: var(--brand-blush);
+/* Focus ring per tone, so it is always visible. */
+[data-tone="primary"] {
+  --focus: var(--brand-sun);
 }
-[data-tone="accent"] {
+[data-tone="pastel"] {
   --focus: var(--brand-ink);
 }
 
@@ -81,26 +71,25 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-link: var(--link);
-  --color-block: var(--block);
-  --color-on-block: var(--on-block);
-  --color-on-block-muted: var(--on-block-muted);
-  --color-block-line: var(--block-line);
-  --color-deep: var(--deep);
-  --color-on-deep: var(--on-deep);
-  --color-on-deep-muted: var(--on-deep-muted);
-  --color-deep-line: var(--deep-line);
-  --color-accent: var(--accent);
-  --color-on-accent: var(--on-accent);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-muted: var(--on-primary-muted);
+  --color-primary-line: var(--primary-line);
+  --color-ink: var(--brand-ink);
+  --color-sun: var(--brand-sun);
+  --color-mint: var(--brand-mint);
+  --color-peach: var(--brand-peach);
+  --color-sky: var(--brand-sky);
+  --color-lilac: var(--brand-lilac);
   --color-focus: var(--focus);
 
-  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-gabarito), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
   html {
-    /* Leave room for the sticky header when jumping to an anchor. */
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6rem;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -131,8 +120,16 @@
   :focus-visible {
     outline: 3px solid var(--focus);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 6px;
   }
+}
+
+/* Carousel track: hide the scrollbar (buttons and keyboard still scroll it). */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Case-study bars: grow once as they scroll into view (CSS only, no JS). */

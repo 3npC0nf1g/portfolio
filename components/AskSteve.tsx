@@ -61,8 +61,8 @@ export function AskSteve({ name }: { name: string }) {
       <button
         type="button"
         onClick={() => dialogRef.current?.showModal()}
-        className="fixed right-4 bottom-4 z-40 inline-flex min-h-12 items-center rounded-full bg-accent px-5 font-display font-semibold text-on-accent shadow-[0_0_0_2px_var(--brand-ink)] hover:bg-white"
-        data-tone="accent"
+        className="fixed right-4 bottom-4 z-40 inline-flex min-h-12 items-center rounded-full bg-sun px-5 font-display font-semibold text-ink shadow-[0_0_0_2px_var(--brand-ink)] hover:bg-white"
+        data-tone="pastel"
       >
         Ask about {name.split(" ")[0]}
       </button>

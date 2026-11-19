@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 3100",
     "lint": "eslint",
-    "lighthouse": "node scripts/lighthouse.mjs / /work/voice-assistant"
+    "lighthouse": "node scripts/lighthouse.mjs /en /en/about /en/projects /en/projects/voice-assistant /en/contact /fr"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.10.0",
@@ -16,7 +16,7 @@
     "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@fontsource/bricolage-grotesque": "^5.3.0",
+    "@fontsource/gabarito": "^5.3.0",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",

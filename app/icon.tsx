@@ -14,16 +14,16 @@ export default async function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: brand.ultramarine,
-          color: brand.blush,
+          background: brand.violet,
+          color: brand.sun,
           fontSize: 34,
-          fontFamily: "Bricolage Grotesque",
+          fontFamily: "Gabarito",
           borderRadius: 16,
         }}
       >
         ST
       </div>
     ),
-    { ...size, fonts: [{ name: "Bricolage Grotesque", data: displayFont, weight: 800, style: "normal" }] },
+    { ...size, fonts: [{ name: "Gabarito", data: displayFont, weight: 800, style: "normal" }] },
   );
 }
