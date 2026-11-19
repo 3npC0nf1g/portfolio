@@ -353,7 +353,7 @@ export const site = {
       },
       {
         heading: "What I would do next",
-        body: ["I would try other techniques to reduce hallucinations and compare the results."],
+        body: ["I would try other techniques to reduce hallucinations, compare the results, and improve monitoring."],
       },
     ] satisfies CaseStudySection[],
   },

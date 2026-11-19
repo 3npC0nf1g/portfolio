@@ -238,7 +238,7 @@ export const siteFr: Site = {
       },
       {
         heading: "Ce que je ferais ensuite",
-        body: ["J'essaierais d'autres techniques pour réduire les hallucinations et je comparerais les résultats."],
+        body: ["J'essaierais d'autres techniques pour réduire les hallucinations, je comparerais les résultats et j'améliorerais le monitoring."],
       },
     ],
   },

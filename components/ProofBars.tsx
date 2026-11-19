@@ -26,7 +26,7 @@ export function ProofBars({ proof }: { proof: Site["proof"] }) {
             </p>
             <div aria-hidden="true" className="h-10 w-full md:h-12">
               <div
-                className={`bar-grow h-full rounded-full ${row.highlight ? "bg-sun" : "border-2 border-on-primary-muted"}`}
+                className="bar-grow h-full rounded-full bg-sun"
                 style={{ width: `${(row.minutes / max) * 100}%` }}
               />
             </div>
