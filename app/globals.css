@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens
+ * -------------
+ * Brand colors and semantic roles live here. Change a hex value once and
+ * every component follows. Components only use the semantic names
+ * (canvas, surface, fg, muted, line, link, block, deep, accent...), never raw hex.
+ *
+ * Tones (flat color blocks):
+ * - block  = ultramarine section (hero, contact)
+ * - deep   = ink section (skills)
+ * - accent = blush fill (buttons, highlights)
+ */
+:root {
+  /* Brand */
+  --brand-ultramarine: #2b36e8;
+  --brand-ink: #10112a;
+  --brand-blush: #ffcfe4;
+  --brand-paper: #f6f6f3;
+  --brand-white: #ffffff;
+
+  /* Semantic roles: light theme (default) */
+  --canvas: var(--brand-white);
+  --surface: var(--brand-paper);
+  --fg: var(--brand-ink);
+  --muted: #50526a;
+  --line: #dcdce6;
+  --link: var(--brand-ultramarine);
+
+  --block: var(--brand-ultramarine);
+  --on-block: var(--brand-white);
+  --on-block-muted: #dadcff;
+  --block-line: #5560f0;
+
+  --deep: var(--brand-ink);
+  --on-deep: #f1f1f8;
+  --on-deep-muted: #b4b6d0;
+  --deep-line: #2c2e52;
+
+  --accent: var(--brand-blush);
+  --on-accent: var(--brand-ink);
+
+  --focus: var(--brand-ultramarine);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #0d0e22;
+    --surface: #15163a;
+    --fg: #eeeef8;
+    --muted: #abadc8;
+    --line: #2a2c55;
+    --link: #a9b0ff;
+
+    --block: #2530c9;
+    --deep: #070816;
+    --deep-line: #23254a;
+
+    --focus: var(--brand-blush);
+
+    color-scheme: dark;
+  }
+}
+
+/* Focus ring color per tone, so it is always visible. */
+[data-tone="block"],
+[data-tone="deep"] {
+  --focus: var(--brand-blush);
+}
+[data-tone="accent"] {
+  --focus: var(--brand-ink);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-link: var(--link);
+  --color-block: var(--block);
+  --color-on-block: var(--on-block);
+  --color-on-block-muted: var(--on-block-muted);
+  --color-block-line: var(--block-line);
+  --color-deep: var(--deep);
+  --color-on-deep: var(--on-deep);
+  --color-on-deep-muted: var(--on-deep-muted);
+  --color-deep-line: var(--deep-line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-focus: var(--focus);
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    /* Leave room for the sticky header when jumping to an anchor. */
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* Case-study bars: grow once as they scroll into view (CSS only, no JS). */
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .bar-grow {
+      transform-origin: left center;
+      animation: bar-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
