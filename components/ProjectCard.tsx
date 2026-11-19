@@ -74,7 +74,7 @@ export function ProjectCard({ project, index, lang }: { project: Project; index:
             </li>
           ))}
         </ul>
-        <div className="mt-auto pt-7">
+        <div className="mt-auto flex flex-wrap gap-3 pt-7">
           {project.href ? (
             <Link
               href={localize(lang, project.href)}
@@ -89,6 +89,18 @@ export function ProjectCard({ project, index, lang }: { project: Project; index:
             <p className="text-muted">
               <Todo>{t.ui.addLinkTodo}</Todo>
             </p>
+          )}
+          {project.secondaryLink && (
+            <a
+              href={project.secondaryLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-describedby={titleId}
+              className="inline-flex min-h-12 items-center rounded-full border-2 border-current px-6 font-display font-bold hover:bg-fg hover:text-canvas"
+            >
+              {project.secondaryLink.label}
+              <span className="sr-only"> {t.ui.newTab}</span>
+            </a>
           )}
         </div>
       </div>

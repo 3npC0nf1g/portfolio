@@ -50,7 +50,7 @@ export const siteFr: Site = {
     projects: {
       title: "Projets",
       description:
-        "Projets de Steve Teuma : MBEYA, un convertisseur ASL vers anglais en temps réel, un système de jumelage de professionnels, des workflows d'agents avec MCP et un assistant vocal pour restaurants.",
+        "Projets de Steve Teuma : MBEYA, l'assistant de commande vocale GPT-4o de Never2Wait, CardScan Pro, un convertisseur ASL vers anglais en temps réel et une plateforme de gestion universitaire.",
     },
     contact: {
       title: "Contact",
@@ -115,6 +115,28 @@ export const siteFr: Site = {
         linkLabel: "Visiter mbeya.ca",
       },
       {
+        ...projectsEn["voice-assistant"],
+        title: "Assistant de commande vocale Never2Wait",
+        short: "Un assistant vocal GPT-4o qui prend les commandes de restaurant, en production.",
+        role: "Stage",
+        summary:
+          "Pendant mon stage chez Never2Wait à Tournai, en Belgique, j'ai construit l'interface TypeScript et Next.js et les services backend d'un assistant vocal GPT-4o (API Azure OpenAI) qui automatise les commandes de restaurant. J'ai travaillé sur l'ingénierie de prompts, la gestion du contexte et la logique de commande en temps réel, avec une gestion d'erreurs robuste pour les conversations à plusieurs tours, et mis en place l'observabilité : journalisation structurée, suivi de la latence et de la qualité, et contrôles de sécurité des réponses de l'IA.",
+        outcome: "Temps de traitement des commandes réduit de 7 à 3 minutes, soit 57 % plus rapide.",
+        tags: ["GPT-4o", "Azure OpenAI", "TypeScript", "Next.js", "Ingénierie de prompts", "Observabilité"],
+        linkLabel: "Lire l'étude de cas",
+        secondaryLink: { label: "Voir la publication LinkedIn", href: projectsEn["voice-assistant"].secondaryLink!.href },
+      },
+      {
+        ...projectsEn["cardscan-pro"],
+        short: "Scanne des cartes de visite avec la caméra du téléphone, en extrait les informations grâce à l'IA et exporte tout vers Excel.",
+        summary:
+          "Créé pour une personne rencontrée à Toronto qui passait des heures à retaper les cartes de visite qu'elle recevait. Je lui ai envoyé un premier prototype le soir même, puis je l'ai amélioré en quelques itérations. L'application scanne les cartes avec la caméra du téléphone, extrait les informations clés grâce à l'IA et exporte tout vers Excel.",
+        outcome: "Premier prototype livré le soir même.",
+        tags: ["Extraction par IA", "Scan par caméra", "Export Excel"],
+        linkLabel: "Essayer CardScan Pro",
+        secondaryLink: { label: "Voir la publication LinkedIn", href: projectsEn["cardscan-pro"].secondaryLink!.href },
+      },
+      {
         ...projectsEn["asl-converter"],
         title: "Convertisseur ASL vers anglais en temps réel",
         short: "Transforme les lettres de la langue des signes en texte, en temps réel, sur un simple processeur d'ordinateur portable.",
@@ -125,29 +147,13 @@ export const siteFr: Site = {
         linkLabel: "Voir la publication LinkedIn",
       },
       {
-        ...projectsEn["matching-system"],
-        title: "Système de jumelage de professionnels",
-        short: "Un produit IA qui met en relation des professionnels, construit avec GPT, Claude et Gemini.",
-        summary: "Un produit IA qui met en relation des professionnels, construit avec GPT, Claude et Gemini.",
-        linkLabel: "En savoir plus",
-      },
-      {
-        ...projectsEn["agent-workflows"],
-        title: "Workflows d'agents avec outils et MCP",
-        short: "Des workflows où des agents IA utilisent des outils et se connectent à des systèmes via MCP.",
-        summary: "Des workflows basés sur des agents, où les modèles appellent des outils et se connectent à des systèmes via MCP.",
-        tags: ["Agents IA", "MCP", "Utilisation d'outils"],
-        linkLabel: "En savoir plus",
-      },
-      {
-        ...projectsEn["voice-assistant"],
-        title: "Assistant vocal pour les commandes de restaurant",
-        short: "Un assistant vocal qui prend les commandes de restaurant, en production.",
+        ...projectsEn["projet-genlog"],
+        title: "Plateforme de gestion universitaire",
+        short: "Un projet d'équipe pour les étudiants, les enseignants et le personnel : inscriptions, cours et messagerie.",
+        role: "Projet d'équipe",
         summary:
-          "Un assistant vocal propulsé par GPT qui prend les commandes de restaurant, grâce aux LLM, au RAG, au traitement de la parole en temps réel et à des intégrations backend. En production.",
-        outcome: "Les commandes sont passées d'environ 7 minutes à 3.",
-        tags: ["GPT", "RAG", "IA vocale", "API backend"],
-        linkLabel: "Lire l'étude de cas",
+          "Un projet du cours de génie logiciel à l'Université de Mons, réalisé en équipe de trois. Étudiants, enseignants, service des inscriptions et service aux étudiants ont chacun leur accès, avec inscription des étudiants, gestion des cours et messagerie. Backend Spring Boot, frontend Vue.js avec Vite, base de données MySQL, le tout lancé avec Docker Compose, et des tests de services en Java.",
+        linkLabel: "Voir sur GitHub",
       },
     ],
   },
@@ -163,10 +169,11 @@ export const siteFr: Site = {
 
   caseStudy: {
     ...site.caseStudy,
-    title: "Assistant vocal pour les commandes de restaurant",
+    title: "Assistant de commande vocale Never2Wait",
     metaDescription:
-      "Étude de cas : un assistant vocal propulsé par GPT pour les commandes de restaurant, construit avec des LLM, du RAG et de la parole en temps réel. Le temps de commande est passé d'environ 7 minutes à 3.",
-    lede: "Un assistant vocal propulsé par GPT qui prend les commandes de restaurant, en production. Il a réduit le temps de commande d'environ 7 minutes à 3, et à environ 1 minute pour les commandes répétées ou structurées.",
+      "Étude de cas : un assistant vocal GPT-4o pour les commandes de restaurant, construit pendant un stage chez Never2Wait. Le traitement des commandes est passé de 7 minutes à 3, soit 57 % plus rapide.",
+    lede: "Un assistant vocal GPT-4o qui prend les commandes de restaurant, construit pendant mon stage chez Never2Wait et en production. Il a réduit le traitement des commandes de 7 minutes à 3, soit 57 % plus rapide, et à environ 1 minute pour les commandes répétées ou structurées.",
+    role: "Stagiaire chez Never2Wait, Tournai, Belgique (hybride)",
     sections: [
       {
         heading: "Le problème",
@@ -175,21 +182,21 @@ export const siteFr: Site = {
       {
         heading: "L'approche",
         body: [
-          "J'ai construit un assistant vocal propulsé par GPT. Le traitement de la parole en temps réel transforme ce que dit le client en texte exploitable par le modèle. Un LLM interprète la commande, et le RAG ancre ses réponses dans les données du restaurant. Des intégrations backend transmettent ensuite la commande au reste du système.",
-          site.caseStudy.sections[1].body[1],
+          "J'ai construit l'interface TypeScript et Next.js et les services backend d'un assistant vocal GPT-4o qui fonctionne sur l'API Azure OpenAI. Le traitement de la parole en temps réel transforme ce que dit le client en texte, le modèle interprète la commande, et le RAG ancre ses réponses dans les données du restaurant.",
+          "J'ai travaillé sur l'ingénierie de prompts, la gestion du contexte et la logique de commande en temps réel, avec une gestion d'erreurs robuste pour que les conversations à plusieurs tours restent sur la bonne voie.",
+          "J'ai aussi mis en place l'observabilité : journalisation structurée, suivi de la latence et de la qualité, pour repérer les problèmes tôt et vérifier la sécurité des réponses de l'IA en production.",
         ],
       },
       {
         heading: "Technologies",
         body: [
-          "GPT (LLM), génération augmentée par récupération (RAG), traitement de la parole en temps réel, intégrations d'API backend.",
-          site.caseStudy.sections[2].body[1],
+          "GPT-4o via l'API Azure OpenAI, TypeScript, Next.js, services backend, génération augmentée par récupération (RAG), traitement de la parole en temps réel, journalisation structurée et monitoring.",
         ],
       },
       {
         heading: "Résultat",
         body: [
-          "L'assistant est en production. Une commande typique prend maintenant environ 3 minutes au lieu d'environ 7. Les commandes répétées ou structurées prennent environ 1 minute.",
+          "L'assistant est en production. Le traitement des commandes est passé de 7 minutes à 3, soit 57 % plus rapide. Les commandes répétées ou structurées prennent environ 1 minute.",
           site.caseStudy.sections[3].body[1],
         ],
       },
@@ -219,6 +226,7 @@ export const siteFr: Site = {
           "Apprentissage automatique",
           "Apprentissage profond",
           "MediaPipe",
+          "Azure OpenAI",
         ],
       },
       {
@@ -235,6 +243,9 @@ export const siteFr: Site = {
           "FastAPI",
           "API backend",
           "PostgreSQL",
+          "MySQL",
+          "Vue.js",
+          "Docker",
           "Auth0",
           "Algorithmique et structures de données",
         ],
@@ -242,7 +253,7 @@ export const siteFr: Site = {
       {
         name: "Mise en production",
         description: "Du code au produit",
-        items: ["Azure", "Vercel", "Railway", "Déploiement infonuagique", "Systèmes d'IA en temps réel", "Systèmes en production"],
+        items: ["Azure", "Vercel", "Railway", "Déploiement infonuagique", "Systèmes d'IA en temps réel", "Systèmes en production", "Observabilité (journalisation, monitoring)"],
       },
     ],
   },

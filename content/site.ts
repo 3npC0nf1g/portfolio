@@ -32,6 +32,8 @@ export type Project = {
   /** Internal page or external URL. null = no write-up yet. */
   href: string | null;
   linkLabel: string;
+  /** Optional second link, e.g. a LinkedIn post or a live app. */
+  secondaryLink?: { label: string; href: string };
 };
 
 export type ProofRow = {
@@ -100,7 +102,7 @@ export const site = {
     projects: {
       title: "Projects",
       description:
-        "Projects by Steve Teuma: MBEYA, a real-time ASL to English converter, a professional matching system, agent workflows with MCP, and a restaurant voice assistant.",
+        "Projects by Steve Teuma: MBEYA, the Never2Wait GPT-4o voice ordering assistant, CardScan Pro, a real-time ASL to English converter, and a university management platform.",
     },
     contact: {
       title: "Contact",
@@ -175,6 +177,31 @@ export const site = {
         linkLabel: "Visit mbeya.ca",
       },
       {
+        slug: "voice-assistant",
+        title: "Never2Wait voice ordering assistant",
+        short: "A GPT-4o voice assistant that takes restaurant orders, live in production.",
+        role: "Internship",
+        summary:
+          "During my internship at Never2Wait in Tournai, Belgium, I built the TypeScript and Next.js interface and the backend services for a GPT-4o voice assistant (Azure OpenAI API) that automates restaurant orders. I worked on prompt engineering, context management and real-time order logic, with robust error handling for multi-turn conversations, and set up observability: structured logging, latency and quality monitoring, and checks on AI output safety.",
+        outcome: "Order processing time cut from 7 to 3 minutes, a 57% improvement.",
+        tags: ["GPT-4o", "Azure OpenAI", "TypeScript", "Next.js", "Prompt engineering", "Observability"],
+        href: "/projects/voice-assistant",
+        linkLabel: "Read the case study",
+        secondaryLink: { label: "See the LinkedIn post", href: "https://lnkd.in/p/dfna-zuX" },
+      },
+      {
+        slug: "cardscan-pro",
+        title: "CardScan Pro",
+        short: "Scans business cards with a phone camera, extracts the details with AI and exports them to Excel.",
+        summary:
+          "Built for someone I met in Toronto who spent hours retyping the business cards she collected. I sent her a first prototype the same night, then refined it over a few iterations. It scans cards with a phone camera, extracts the key information with AI, and exports everything to Excel.",
+        outcome: "First prototype delivered the same night.",
+        tags: ["AI extraction", "Camera scanning", "Excel export"],
+        href: "https://lnkd.in/ebwJM7Xy",
+        linkLabel: "Try CardScan Pro",
+        secondaryLink: { label: "See the LinkedIn post", href: "https://lnkd.in/p/d3-KJHBz" },
+      },
+      {
         slug: "asl-converter",
         title: "Real-time ASL to English converter",
         short: "Turns sign language letters into text in real time, on a regular laptop CPU.",
@@ -186,41 +213,18 @@ export const site = {
         linkLabel: "See the LinkedIn post",
       },
       {
-        slug: "matching-system",
-        title: "Professional matching system",
-        short: "An AI product that matches professionals, built on GPT, Claude and Gemini.",
+        slug: "projet-genlog",
+        title: "University management platform",
+        short: "A team project for students, teachers and university staff: registration, courses and messaging.",
+        role: "Team project",
         summary:
-          "An AI product that matches professionals, built on GPT, Claude and Gemini.",
+          "A software engineering course project at the University of Mons, built in a team of three. Students, teachers, the registration office and student services each get their own access, with student registration, course management and a messaging system. Spring Boot backend, Vue.js frontend on Vite, MySQL database, everything started with Docker Compose, and service tests in Java.",
         outcome: "",
-        tags: ["GPT", "Claude", "Gemini", "LLMs"],
-        // [TODO] Add a link if you write this up.
-        href: null,
-        linkLabel: "Read more",
+        tags: ["Java", "Spring Boot", "Vue.js", "Vite", "MySQL", "Docker"],
+        href: "https://github.com/3npC0nf1g/ProjetGenLog",
+        linkLabel: "View on GitHub",
       },
-      {
-        slug: "agent-workflows",
-        title: "Agent workflows with tools and MCP",
-        short: "Workflows where AI agents use tools and connect to systems through MCP.",
-        summary:
-          "Agent-based workflows where models call tools and connect to systems through MCP.",
-        outcome: "",
-        tags: ["AI agents", "MCP", "Tool use"],
-        // [TODO] Add a link if you write this up.
-        href: null,
-        linkLabel: "Read more",
-      },
-      {
-        slug: "voice-assistant",
-        title: "Voice assistant for restaurant orders",
-        short: "A voice assistant that takes restaurant orders, live in production.",
-        summary:
-          "A GPT-powered voice assistant that takes restaurant orders, using LLMs, RAG, real-time speech processing and backend integrations. Live in production.",
-        outcome: "Orders went from about 7 minutes to 3.",
-        tags: ["GPT", "RAG", "Speech AI", "Backend APIs"],
-        href: "/projects/voice-assistant",
-        linkLabel: "Read the case study",
-      },
-      // [TODO] Add more projects here using the same shape.
+      // [TODO] Add more projects here using the same shape (and in content/site.fr.ts).
     ] as Project[],
   },
 
@@ -245,11 +249,11 @@ export const site = {
   },
 
   caseStudy: {
-    title: "Voice assistant for restaurant orders",
+    title: "Never2Wait voice ordering assistant",
     metaDescription:
-      "Case study: a GPT-powered voice assistant for restaurant orders, built with LLMs, RAG and real-time speech. Order time went from about 7 minutes to 3.",
-    lede: "A GPT-powered voice assistant that takes restaurant orders, live in production. It cut order time from about 7 minutes to 3, and to about 1 minute for repeat or structured orders.",
-    role: "[TODO] Your role, e.g. sole engineer or lead engineer, and team size",
+      "Case study: a GPT-4o voice assistant for restaurant orders, built during an internship at Never2Wait. Order processing went from 7 minutes to 3, a 57% improvement.",
+    lede: "A GPT-4o voice assistant that takes restaurant orders, built during my internship at Never2Wait and live in production. It cut order processing from 7 minutes to 3, a 57% improvement, and to about 1 minute for repeat or structured orders.",
+    role: "Intern at Never2Wait, Tournai, Belgium (hybrid)",
     timeframe: "[TODO] When you built it and how long it took",
     sections: [
       {
@@ -262,21 +266,21 @@ export const site = {
       {
         heading: "Approach",
         body: [
-          "I built a voice assistant powered by GPT. Real-time speech processing turns what the customer says into text the model can work with. An LLM interprets the order, and RAG grounds its answers in the restaurant's own data. Backend integrations pass the finished order on to the rest of the system.",
-          "[TODO] Which data RAG retrieves from (for example the menu), which backend systems you integrated with, and how you handled mistakes or unclear requests.",
+          "I built the TypeScript and Next.js interface and the backend services for a GPT-4o voice assistant running on the Azure OpenAI API. Real-time speech processing turns what the customer says into text, the model interprets the order, and RAG grounds its answers in the restaurant's own data.",
+          "I worked on prompt engineering, context management and the real-time order logic, with robust error handling so multi-turn conversations stay on track.",
+          "I also set up observability: structured logging, latency and quality monitoring, so issues are caught early and AI output safety can be checked in production.",
         ],
       },
       {
         heading: "Stack",
         body: [
-          "GPT (LLM), retrieval-augmented generation (RAG), real-time speech processing, backend API integrations.",
-          "[TODO] Confirm languages, cloud and hosting (for example Python, Azure) and the speech services you used.",
+          "GPT-4o through the Azure OpenAI API, TypeScript, Next.js, backend services, retrieval-augmented generation (RAG), real-time speech processing, structured logging and monitoring.",
         ],
       },
       {
         heading: "Result",
         body: [
-          "The assistant is live in production. A typical order now takes about 3 minutes instead of about 7. Repeat or structured orders take about 1 minute.",
+          "The assistant is live in production. Order processing went from 7 minutes to 3, a 57% improvement. Repeat or structured orders take about 1 minute.",
           "[TODO] Any other results you can share, such as volume handled or accuracy.",
         ],
       },
@@ -306,6 +310,7 @@ export const site = {
           "Machine learning",
           "Deep learning",
           "MediaPipe",
+          "Azure OpenAI",
         ],
       },
       {
@@ -322,6 +327,9 @@ export const site = {
           "FastAPI",
           "Backend APIs",
           "PostgreSQL",
+          "MySQL",
+          "Vue.js",
+          "Docker",
           "Auth0",
           "Algorithms and data structures",
         ],
@@ -336,6 +344,7 @@ export const site = {
           "Cloud deployment",
           "Real-time AI systems",
           "Production systems",
+          "Observability (logging, monitoring)",
         ],
       },
     ],
